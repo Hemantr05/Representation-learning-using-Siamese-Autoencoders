@@ -16,11 +16,9 @@ from tqdm import tqdm
 
 
 from model import VGGAutoencoder, Vanilla_CAE, SiameseNetwork, SiameseNetwork2 
-#from models import VggSiamese
 from helper import imshow, show_plot
 from losses import ContrastiveLoss, TripletLoss
 from dataloader2 import SiameseNetworkDataset
-#from dataloader import *
 
 if __name__ == '__main__':
 
@@ -56,7 +54,6 @@ if __name__ == '__main__':
 
 	# Load the dataset as pytorch tensors using dataloader
 	train_dataloader = DataLoader(siamese_dataset,shuffle=args.shuffle,num_workers=args.num_workers, batch_size=args.batch_size)
-   	 #train_loader = get_train_valid_loader(args.training_dir, 32, True)
 	
 	copyOfLr = args.lr
 
