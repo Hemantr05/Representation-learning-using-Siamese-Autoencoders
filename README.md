@@ -20,6 +20,7 @@ Enable gpu 0
 `$export CUDA_VISIBLE_DEVICES=0`
 
 Train network
+
 `$CUDA_VISIBLE_DEVICES=0 python train.py --lr_sim 5e-4 --lr_recon 1e-4 --epochs 25 --batch_size 4 --mu 1e-5 --training_dir 'Add dataset path' --training_csv 'Add corresponding csv path'`
 
 ## Testing:
