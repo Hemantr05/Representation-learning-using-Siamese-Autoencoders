@@ -45,13 +45,7 @@ if __name__ == '__main__':
 
 
 	train_transforms = transforms.Compose([
-		#transforms.RandomResizedCrop(size=256,scale=(0.8,1.0)),
-		#transforms.RandomHorizontalFlip(),
 		transforms.ToTensor(),
-		#transforms.CenterCrop(size=224),
-		#transforms.Resize((224,224)),
-#		transforms.Normalize(mean=[0.485,0.456,0.406],	# imagenet mean/std
-#	              std=[0.229,0.224,0.225])
 	])
 
 
@@ -59,15 +53,6 @@ if __name__ == '__main__':
 	# Load the the dataset from raw image folders
 	siamese_dataset = SiameseNetworkDataset(args.training_csv,args.training_dir,transform=train_transforms)
 
-	# Viewing the sample of images and to check whether its loading properly
-    	#vis_dataloader = DataLoader(siamese_dataset, shuffle=args.shuffle, batch_size=args.batch_size)
-	#dataiter = iter(vis_dataloader)
-
-
-	#example_batch = next(dataiter)
-	#concatenated = torch.cat((example_batch[0],example_batch[1]),0)
-	#imshow(torchvision.utils.make_grid(concatenated))
-	#print(example_batch[2].numpy())
 
 	# Load the dataset as pytorch tensors using dataloader
 	train_dataloader = DataLoader(siamese_dataset,shuffle=args.shuffle,num_workers=args.num_workers, batch_size=args.batch_size)
@@ -88,13 +73,9 @@ if __name__ == '__main__':
 	criterion = nn.MSELoss()
 
 	# Declare optimizer
-	#optimizer = optim.RMSprop(model.parameters(),lr=copyOfLr,alpha=0.99,eps=1e-8,weight_decay=0.0005,momentum=0.9)
 	
 	optimizer1 = optim.Adagrad(model.parameters(),lr=args.recon)
 	optimizer2 = optim.Adam(model.parameters(),lr=args.sim)
-
-#	optimizer = optim.SGD(model.parameters(),lr=copyOfLr,momentum=0.9)
-	#ep = [1]
 
 	counter = []
 	loss_history = []
@@ -104,15 +85,11 @@ if __name__ == '__main__':
 		for i, data in tqdm(enumerate(train_dataloader,0)):
 			img0, img1 , label = data
 			img0, img1 , label = img0.to(device), img1.to(device) , label.to(device)
+
 			optimizer1.zero_grad()
-#			print("\nImage1 size: ", img0.size())
-#			print("\nImage2 size: ", img1.size())
-#			print("\nLabel size: ", label.size())
-#			img0 = img0.view([args.batch_size, 3, 352, 640])
-#			img1 = img1.view([args.batch_size, 3, 352, 640])
+			
 			output1, output2, recon1, recon2 = model(img0,img1)
-#			print("\nOutput1 size: ", output1.size())
-#			print("\nOutput2 size: ", output2.size())
+
 			reconstruction1 = criterion(recon1,img0)
 			reconstruction2 = criterion(recon2,img1)
 			reconstruction = (reconstruction1 + reconstruction2)/2
@@ -130,10 +107,7 @@ if __name__ == '__main__':
 #			counter.append(epoch)
 
 
-            #print("\nEpoch: {} | Temp_Loss: {}" .format(epoch,loss))
-            # plt.plot(epoch,loss,'r-')
-            # plt.xlabel('epochs')
-            #plt.ylabel('Training loss')
+
 		# compute the epoch training loss
 		loss = train_loss / len(train_dataloader)
 		#loss_history.append(loss)
@@ -145,30 +119,9 @@ if __name__ == '__main__':
 		loss_history.append(loss)
 		counter.append(epoch)
 
-			#if i %10 == 0 :
-			#	print("\nEpoch number {} | Current loss {}\n".format(epoch,loss_contrastive.item()))
-			#	iteration_number +=10
-			#	counter.append(iteration_number)
-			#	loss_history.append(loss_contrastive.item())
+
 
 	show_plot(counter,loss_history)
-
-#			print("\nImage {}/{} | Train_Loss: {}".format(i,len(train_dataloader),loss_contrastive))
-
-
-			# add the mini-batch training loss to epoch loss
-#			loss_contrastive += loss_contrastive.item()
-
-
-
-		# compute the epoch training loss
-#		loss = loss / len(train_loader)
-#		loss_history.append(loss)
-#		counter.append(epoch)
-
-
-	# display the epoch training loss
-#	print("\nepoch : {}/{}, recon loss = {:.8f}".format(epoch + 1, args.epochs, loss))
 
 
 	torch.save(model.state_dict(),"./Siamese_model_20epochs.pth")
