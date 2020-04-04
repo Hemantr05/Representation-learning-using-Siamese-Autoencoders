@@ -11,12 +11,21 @@ The network is uses two loss functions (in `scripts/losses.py`): ContrastiveLoss
 
 
 # Usage:
+(Under progress)
 
-`
+## Training:
 
-# Coming soon
+Enable gpu 0
 
-`
+`$export CUDA_VISIBLE_DEVICES=0`
+
+Train network
+`$CUDA_VISIBLE_DEVICES=0 python train.py --lr_sim 5e-4 --lr_recon 1e-4 --epochs 25 --batch_size 4 --mu 1e-5 --training_dir 'Add dataset path' --training_csv 'Add corresponding csv path'`
+
+## Testing:
+`$CUDA_VISIBLE_DEVICES=0 python test.py --test_dir 'Add-path-to-testset' --test_csv 'Add-path-to-csv.csv'`
+
+
 
 
 References:
