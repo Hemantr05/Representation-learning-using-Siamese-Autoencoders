@@ -1,10 +1,12 @@
-# SiameseNetwork-for-representation-learning
+# Pytorch implementation of Unsupervised-Learning-of-Spatiotemporally-Coherent-Metrics
 
 
 
 
 
 Original paper:
+
+
 [Unsupervised Learning of Spatiotemporally Coherent Metrics] (https://arxiv.org/abs/1412.6056)
 
 
