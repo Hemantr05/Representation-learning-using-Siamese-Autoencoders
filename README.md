@@ -30,6 +30,14 @@ Train network
 
 
 References:
-1. [Unsupervised Learning of Spatiotemporally Coherent Metrics](https://arxiv.org/abs/1412.6056)
 
+
+`@misc{goroshin2015unsupervised,
+      title={Unsupervised Learning of Spatiotemporally Coherent Metrics}, 
+      author={Ross Goroshin and Joan Bruna and Jonathan Tompson and David Eigen and Yann LeCun},
+      year={2015},
+      eprint={1412.6056},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}`
 
