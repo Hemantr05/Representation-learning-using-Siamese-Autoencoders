@@ -34,10 +34,15 @@ References:
 
 `@misc{goroshin2015unsupervised,
       title={Unsupervised Learning of Spatiotemporally Coherent Metrics}, 
+      
       author={Ross Goroshin and Joan Bruna and Jonathan Tompson and David Eigen and Yann LeCun},
+      
       year={2015},
+      
       eprint={1412.6056},
+      
       archivePrefix={arXiv},
+      
       primaryClass={cs.CV}
 }`
 
